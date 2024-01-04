@@ -1,0 +1,35 @@
+The dataset of our choice is presented at \href{https://nijianmo.github.io/amazon/index.html}{\textit{this link}}. It is composed of multiple collections of documents, each one containing some reviews, registered between the 1996 and 2018, about a specific kind of products sold on Amazon. This fact makes the dataset suitable for our purposes, since it contains a lot of reviews but also makes it possible to filter the reviews by product category, allowing to eventually focus the analysis on a specific kind of products.
+
+Among all the available collections, we've decided to use the one about \textbf{Digital Music} (can be retrieved at \href{https://jmcauley.ucsd.edu/data/amazon_v2/categoryFilesSmall/Digital_Music_5.json.gz}{\textit{this link}}) since this file contains a suitable amount of reviews (169.781) while still weighting less then 100 MB, allowing us to upload it to a GitHub repository and parallelize the workload.
+
+The documents inside the dataset have the following shape: \\
+\begin{verbatim}
+{
+    "overall": 5.0, 
+    "vote": "5", 
+    "verified": true, 
+    "reviewTime": "10 27, 2007", 
+    "reviewerID": "A16QJ649N8PRV", 
+    "asin": "5557706259", 
+    "style": {"Format:": " Audio CD"}, 
+    "reviewerName": "S. Peek", 
+    "reviewText": "This latest effort by Casting Crowns is ...", 
+    "summary": "Very Good", 
+    "unixReviewTime": 1193443200
+}
+\end{verbatim}
+
+where the fields have the following meaning:
+\begin{itemize}
+    \item \textbf{overall}: the rating of the product, a float number going from 1 to 5;
+    \item \textbf{vote}: the number of votes the review received, saved as a string;
+    \item \textbf{verified}: a boolean value indicating whether the review has been verified or not;
+    \item \textbf{reviewTime}: the date of the review, saved in RAW date format as a string;
+    \item \textbf{reviewerID}: the alphanumeric ID of the user who wrote the review;
+    \item \textbf{asin}: acronym of Amazon Standard Identification Number, is the alphanumeric ID that represents a specific product;
+    \item \textbf{style}: a subdocument containing additional data about the version of the product. In the case of this collection it just contains information about the format of the product, whose possible values will be retrieved with a suited query;
+    \item \textbf{reviewerName}: a string containing the name of the user who wrote the review;
+    \item \textbf{reviewText}: a string containing the text of the review;
+    \item \textbf{summary}: a string containing a summary of the review;
+    \item \textbf{unixReviewTime}: the date of the review in Unix epoch time format.
+\end{itemize}

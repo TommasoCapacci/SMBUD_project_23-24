@@ -1,0 +1,6 @@
+\begin{verbatim}
+db.reviews.aggregate([
+    {"$unwind": "$style"},
+    {"$group": {"_id": "$style"}}
+])
+\end{verbatim}

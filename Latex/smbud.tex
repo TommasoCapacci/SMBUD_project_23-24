@@ -24,6 +24,22 @@
 \usepackage{amssymb}
 \usepackage{booktabs}
 
+% Define colors for JSON syntax highlighting
+\definecolor{jsonkey}{rgb}{0.13, 0.67, 0.8}
+\definecolor{jsonstring}{rgb}{0.3, 0.3, 0.9}
+\definecolor{jsonnumber}{rgb}{0.7, 0.53, 0.02}
+
+\usepackage{listings}
+\lstdefinelanguage{json}{
+    basicstyle=\ttfamily\small,
+    commentstyle=\color{gray},
+    stringstyle=\color{jsonstring},
+    keywordstyle=\color{jsonkey},
+    numberstyle=\color{jsonnumber},
+    morestring=[b]",
+    morestring=[d]'
+}
+
 
 \titleformat{\paragraph}
 {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
@@ -34,11 +50,10 @@
 \begin{titlepage}
     \centering
     \vfill
-    \includegraphics[scale=0.7]{Images/PolimiLogo.png}\par\vspace{1cm}
+    \includegraphics[scale=0.9]{Images/PolimiLogo.png}\par\vspace{1cm}
     \vspace{1cm}
-    {\huge\bfseries System and Methods for Unstructured Data Project: project title \par}
-    \vspace{2cm}
-    {\Large {Luca Bonini ()}\par}
+    {\huge\bfseries System and Methods for Unstructured Data Project: Amazon Reviews \par}
+    \vspace{3cm}
     {\Large {Tommaso Capacci (10654230)}\par}
     \vfill
     {\large \textbf{AY 2023/2024}\par}

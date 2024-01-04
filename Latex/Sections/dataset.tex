@@ -5,22 +5,23 @@ Among all the available collections, we've decided to use the one about \textbf{
 The documents inside the dataset have the following shape: \\
 \begin{verbatim}
 {
+    "image": ["https://images-na.ssl-images-amazon.com/images/..."], 
     "overall": 5.0, 
-    "vote": "5", 
+    "vote": "2",
     "verified": true, 
-    "reviewTime": "10 27, 2007", 
-    "reviewerID": "A16QJ649N8PRV", 
-    "asin": "5557706259", 
-    "style": {"Format:": " Audio CD"}, 
-    "reviewerName": "S. Peek", 
-    "reviewText": "This latest effort by Casting Crowns is ...", 
-    "summary": "Very Good", 
-    "unixReviewTime": 1193443200
+    "reviewTime": "01 8, 2015", 
+    "reviewerID": "A36GE53TK8V94L", 
+    "asin": "B000T1EJ0W", 
+    "style": {"Format:": "MP3 Music"}, 
+    "reviewerName": "MysticWolf229", 
+    "reviewText": "the theme song to the one and only movie that ...", 
+    "unixReviewTime": 1420675200
 }
 \end{verbatim}
 
 where the fields have the following meaning:
 \begin{itemize}
+    \item \textbf{image}: an array of URLs pointing to the images of the product review;
     \item \textbf{overall}: the rating of the product, a float number going from 1 to 5;
     \item \textbf{vote}: the number of votes the review received, saved as a string;
     \item \textbf{verified}: a boolean value indicating whether the review has been verified or not;

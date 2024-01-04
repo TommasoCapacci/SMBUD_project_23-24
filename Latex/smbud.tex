@@ -1,0 +1,80 @@
+\documentclass[table, 12pt]{article}
+
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{tocloft}
+\usepackage{todonotes}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{pdfpages}
+\usepackage{pdflscape}
+\usepackage{textpos}
+\usepackage{scrhack}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{tasks}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{listing}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{booktabs}
+
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\begin{document}
+\begin{titlepage}
+    \centering
+    \vfill
+    \includegraphics[scale=0.7]{Images/PolimiLogo.png}\par\vspace{1cm}
+    \vspace{1cm}
+    {\huge\bfseries System and Methods for Unstructured Data Project \par}
+    \vspace{2cm}
+    {\Large {Luca Bonini ()}\par}
+    {\Large {Tommaso Capacci (10654230)}\par}
+    \vfill
+    {\large \textbf{AY 2023/2024}\par}
+    \vfill
+\end{titlepage}
+\hypersetup{
+    pdfborder = {0 0 0}
+}
+\thispagestyle{plain}
+\pagenumbering{gobble}
+\mbox{}
+\newpage
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{{\section{Introduction}}}
+\label{sect:introduction}
+\input{Sections/introduction}
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{{\section{Data Wrangling}}}
+\label{sect:wrangling}
+\input{Sections/wrangling}
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{{\section{Dataset}}}
+\label{sect:dataset}
+\input{Sections/dataset}
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{{\section{Queries}}}
+\label{sect:queries}
+\input{Sections/queries}
+
+\end{document}

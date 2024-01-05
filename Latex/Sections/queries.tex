@@ -1,21 +1,21 @@
 \begin{enumerate}
-    \item check: reviews per product
-    \item check: reviews per reviewer
-    \item Order Product by Average Rating
+    \item Order Products by Average Rating
+    \item Most Reviewed Products
     \item Average Helpful Votes per Reviewer
-    \item Number of Reviews with Images per Verfied Status
+    \item Number of Reviews with Images and positive Verfied Status
     \item Average Review Length
     \item Temporal Distribution of Reviews
     \item Distribution of Overall Ratings
     \item Number of Reviews by Verified Status and Rating
     \item Average Number of Votes for Verified vs. Non-Verified Reviews
-    \item Different types of Format
     \item Average Rating per Format Style
 \end{enumerate}
 
-\begin{verbatim}
+\subsection{Order Products by Average Rating}
+The most straightforward query that can be performed is to order the products by their average rating, in order to understand which are the most appreciated ones. \\
+\begin{lstlisting}[language=Java]
 db.reviews.aggregate([
-    {"$unwind": "$style"},
-    {"$group": {"_id": "$style"}}
-])
-\end{verbatim}
+  { $group: { _id: "$asin", avg_rating: { $avg: "$overall" } } },
+  { $sort: { avg_rating: -1 } }
+]);
+\end{lstlisting}

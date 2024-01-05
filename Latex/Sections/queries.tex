@@ -57,7 +57,24 @@ In this case we decided to use the \texttt{\$ifNull} operator to handle the case
 Results:
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=1]{Images/q3_result.png}
+  \includegraphics[scale=0.7]{Images/q3_result.png}
   \caption{Query 3 (partial) results}
   \label{fig:q3_result}
 \end{figure}
+
+\subsection{Number of Reviews with Images per Verified Status}
+Another aspect that could be useful is to compute the number of reviews that have at least one image attached for every possible value of the \textit{verified} field: this can be interesting since it can highlight a correlation between the fact that a purchase has been verified and the fact that some images were included in the relative review. \\
+\begin{lstlisting}[language=Java]
+db.reviews.aggregate([
+  { $match: { image: { $exists: true } } },
+  { $group: { _id: "$verified", count: { $sum: 1 } } }
+]);
+\end{lstlisting}
+Results:
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=1]{Images/q4_result.png}
+  \caption{Query 4 results}
+  \label{fig:q4_result}
+\end{figure}
+From this output we can understand that the number of validated reviews with images is not so much higher than the other one, meaning that the presence of images is a not so strong indicator of the fact that the relative purchase has been verified. \\

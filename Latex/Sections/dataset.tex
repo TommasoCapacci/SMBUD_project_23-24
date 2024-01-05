@@ -1,8 +1,16 @@
-The dataset of our choice is presented at \href{https://nijianmo.github.io/amazon/index.html}{\textit{this link}}. It is composed of multiple collections of documents, each one containing some reviews, registered between the 1996 and 2018, about a specific kind of products sold on Amazon. This fact makes the dataset suitable for our purposes, since it contains a lot of reviews but also makes it possible to filter the reviews by product category, allowing to eventually focus the analysis on a specific kind of products.
+The dataset of our choice is managed by the University of California San Diego (UCSD) and is presented in this \href{https://nijianmo.github.io/amazon/index.html}{\color{blue}\underline{website}}.
+It is composed of multiple collections of documents, each one containing some reviews, registered between the 1996 and 2018, about a specific kind of products sold on Amazon. 
+This fact makes the dataset suitable for our purposes, since it contains a lot of reviews but also would make it possible to filter the reviews by product category, allowing to eventually focus the analysis on a specific kind of goods.
 
-Among all the available collections, we've decided to use the one about \textbf{Digital Music} (can be retrieved at \href{https://jmcauley.ucsd.edu/data/amazon_v2/categoryFilesSmall/Digital_Music_5.json.gz}{\textit{this link}}) since this file contains a suitable amount of reviews (169.781) while still weighting less then 100 MB, allowing us to upload it to a GitHub repository and parallelize the workload.
+In particular, in the website cited above, are provided 2 versions of the same datasets:
+\begin{itemize}
+    \item \textit{5-core}: this is a reduced version of the original, complete dataset, in which are included only the 5 most representative reviews per product
+    \item \textit{ratings only}: in this version of the dataset only information about the user, the product, the rating and the timestamp of pubblication time is kept for each review
+\end{itemize}
+While the second version of the dataset contains an higher amount of reviews, we decided to use the first one since it contained more interesting fields.
 
-The documents inside the dataset have the following shape: \\
+Among all the available collections, we've decided to use the one about \textbf{Digital Music} (which can be retrieved at this \href{https://jmcauley.ucsd.edu/data/amazon_v2/categoryFilesSmall/Digital_Music_5.json.gz}{\color{blue}\underline{link}}) since this file includes a suitable number of datapoints (169.781) while still containing an interesting amount of attributes per document.
+Specifically, the documents inside the selected collection have the following shape:
 \begin{verbatim}
 {
     "image": ["https://images-na.ssl-images-amazon.com/images/..."], 
@@ -18,8 +26,7 @@ The documents inside the dataset have the following shape: \\
     "unixReviewTime": 1420675200
 }
 \end{verbatim}
-
-where the fields have the following meaning:
+whose fields have the following meaning:
 \begin{itemize}
     \item \textbf{image}: an array of URLs pointing to the images of the product review;
     \item \textbf{overall}: the rating of the product, a float number going from 1 to 5;

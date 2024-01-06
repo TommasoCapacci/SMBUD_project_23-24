@@ -1,1 +1,1 @@
-The "scripts" folder contains the original version of the dataset and the python script with which we extracted the subset of data we performed our queries on (which anyway is contained in the "dump" folder) 
+The "scripts" folder contains the python script with which we extracted the subset of data we performed our queries on (the one contained in the "dump" folder) 

@@ -2,9 +2,8 @@ Since we decided to operate directly in MongoDB thorugh the provided shell, all 
 
 As one can expect, since the most interesting information can be extracted by means of general statistic computed over the dataset, all of the queries that we performed are aggregate queries based on the \texttt{\$group} operator, which allows to group documents by a specific field and perform some operations on the grouped documents, such as counting them or computing the average of a specific field.
 
-For this reason we decided to include some additional normal queries (mostly countDocuments() queries) to support our analysis where we thought it was necessary. \\
+For this reason we decided to include some additional normal queries (mostly \texttt{countDocuments()} queries) to support our analysis where we thought it was necessary. \\
 
-\newpage
 \subsection{Order Products by Average Rating}
 The most straightforward query that can be performed is to order the products by their average rating, in order to understand which are the most appreciated ones. \\
 \begin{lstlisting}[language=Java]
@@ -13,6 +12,7 @@ db.reviews.aggregate([
   { $sort: { avg_rating: -1 } }
 ]);
 \end{lstlisting}
+\newpage
 Results:
 \begin{figure}[H]
   \centering
@@ -22,6 +22,7 @@ Results:
 \end{figure}
 As we can see from Figure \ref{fig:q1_result}, there are many products sharing the highest value for average rating, meaning that all the reviews that involve those products have the highest possible value, which is 5.\\
 
+\newpage
 \subsection{Most Reviewed Products}
 Another interesting query is to find the most reviewed products, in order to understand which are the most popular ones. \\
 \begin{lstlisting}[language=Java]
@@ -39,8 +40,8 @@ Results:
 \end{figure}
 
 \newpage
-\subsection{Average Helpful Votes per Reviewer}
-We can write a query to find the average number of helpful votes per reviewer, in order to understand which are the most appreciated ones. \\
+\subsection{Average Votes per Reviewer}
+We can write a query to find the average number of votes per reviewer, in order to understand which are the most appreciated ones. \\
 \begin{lstlisting}[language=Java]
 db.reviews.aggregate([
   { $group: { _id: "$reviewerID", 
@@ -197,14 +198,29 @@ Results:
   \caption{Query 8 results}
   \label{fig:q8_result}
 \end{figure}
-Although it seems that people tend to trust a little more negative reviews, also in this case we don't know if we can draw any conclusion since we should consider the overall distribution of the ratings, which will be investigated in the next query. \\
+Although it seems that people tend to trust a little more negative reviews, also in this case we don't know if we can draw any conclusion since we should consider the overall distribution of the ratings, which will be investigated in the next query.
 
-\subsection{Distribution of Ratings}
-In order to understand the distribution of the ratings, we can compute the number of reviews for every possible value of the \textit{overall} field. \\
+As we can see from Figure \ref{fig:q8_result_spec}, the number of reviews with a rating of 4 or 5 is much higher than the other ones.
+We can understand multiple things from this:
+\begin{itemize}
+    \item in the context of the previous query, the number of high rating reviews is much higher than the number of low ones, so it can be possible that the average number of votes has been effected by the missing values in the \textit{vote} field for most of the high rating comments;
+    \item people prefer to write positive reviews rather than negative ones.
+\end{itemize}
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.6]{Images/q8_result_spec.png}
+  \caption{Ratings distribution}
+  \label{fig:q8_result_spec}
+\end{figure}
+
+\subsection{Number of Images per Format Style}
+We can compute the number of images for every possible value of the \textit{style.Format} field, in order to understand which are the formats that tend to have more images attached to their reviews. \\
 \begin{lstlisting}[language=Java]
 db.reviews.aggregate([
-  { $group: { _id: "$overall", count: { $sum: 1 } } },
-  { $sort: { _id: 1 } }
+  { $match: { image: { $exists: true }, style: { $exists: true }} },
+  { $unwind: "$image" },
+  { $group: { _id: "$style.Format:", count: { $sum: 1 } } },
+  { $sort: { count: -1 } }
 ]);
 \end{lstlisting}
 Results:
@@ -214,16 +230,11 @@ Results:
   \caption{Query 9 results}
   \label{fig:q9_result}
 \end{figure}
-As we can see from Figure \ref{fig:q9_result}, the number of reviews with a rating of 4 or 5 is much higher than the other ones.
-We can understand multiple things from this:
-\begin{itemize}
-    \item in the context of the previous query, the number of high rating reviews is much higher than the number of low ones, so it can be possible that the average number of votes has been effected by the missing values in the \textit{vote} field for most of the high rating comments;
-    \item people prefer to write positive reviews rather than negative ones.
-\end{itemize}
+From Figure \ref{fig:q9_result} we can see that the format more frequently associated with images is, quite surprisingly, \textit{MP3 Music} even if it is a digital format. \\
 
 \newpage
 \subsection{Average Rating per Format Style and Year}
-As our last query, we decided to compute the average rating for every possible value of the \textit{style.Format} field, in order to understand which was the most appreciated format style for every year. \\
+As our last query, we decided to compute the average rating per format and year, in order to understand which has been the most appreciated format style for every year. \\
 \begin{lstlisting}[language=Java]
 db.reviews.aggregate([
   { $match: {"style": {$exists: true}}},

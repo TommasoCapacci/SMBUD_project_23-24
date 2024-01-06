@@ -13,7 +13,7 @@ db.reviews.aggregate([
 ]);
 \end{lstlisting}
 \newpage
-Results:
+\textbf{Results:}
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.6]{Images/q1_result.png}
@@ -31,7 +31,7 @@ db.reviews.aggregate([
   { $sort: { count: -1 } }
 ]);
 \end{lstlisting}
-Results:
+\textbf{Results:}
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.7]{Images/q2_result.png}
@@ -50,7 +50,7 @@ db.reviews.aggregate([
 ]);
 \end{lstlisting}
 In this case we decided to use the \texttt{\$ifNull} operator to handle the case in which the \texttt{vote} field is missing: in practice, we filled the missing values in this field by putting them equal to 0. \\
-Results:
+\textbf{Results:}
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.6]{Images/q3_result.png}
@@ -67,7 +67,7 @@ db.reviews.aggregate([
   { $group: { _id: "$verified", count: { $sum: 1 } } }
 ]);
 \end{lstlisting}
-Results:
+\textbf{Results:}
 \begin{figure}[H]
   \centering
   \includegraphics[scale=1]{Images/q4_result.png}
@@ -100,7 +100,7 @@ db.reviews.aggregate([
   { $sort: { "_id.year": -1, "_id.month": 1 } }
 ]);
 \end{lstlisting}
-Results:
+\textbf{Results:}
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.45]{Images/q5_result.png}
@@ -124,7 +124,7 @@ db.reviews.aggregate([
   { $sort: { "_id.verified": -1, "_id.rating": 1 } }
 ]);
 \end{lstlisting}
-Results:
+\textbf{Results:}
 \begin{figure}[H]
   \centering
   \begin{minipage}{0.45\textwidth}
@@ -156,7 +156,7 @@ db.reviews.aggregate([
     avg_votes: { $avg: {$ifNull:[{$toInt: "$vote"}, 0]} } } }
 ]);
 \end{lstlisting}
-Results:
+\textbf{Results:}
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.7]{Images/q7_result.png}
@@ -191,7 +191,7 @@ db.reviews.aggregate([
 ]);
 \end{lstlisting}
 As it can be seen, we used the \texttt{\$cond} operator to create the classification of the reviews based on their rating. \\
-Results:
+\textbf{Results:}
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.55]{Images/q8_result.png}
@@ -223,7 +223,7 @@ db.reviews.aggregate([
   { $sort: { count: -1 } }
 ]);
 \end{lstlisting}
-Results:
+\textbf{Results:}
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.6]{Images/q9_result.png}
@@ -250,7 +250,7 @@ db.reviews.aggregate([
   { $sort: { "_id.year": 1, "avg_rating": -1} }
 ]);
 \end{lstlisting}
-Results:
+\textbf{Results:}
 \begin{figure}[H]
   \centering
   \begin{minipage}{0.45\textwidth}
